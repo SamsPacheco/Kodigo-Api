@@ -1,3 +1,4 @@
+import React from 'react'
 import { Navigate, Route, Routes } from 'react-router'
 import { Accomodations, Bookings, Dashboard, Login } from '../pages'
 
