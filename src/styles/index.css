@@ -1,0 +1,13 @@
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+:root {
+  --background-accommodation: #ffffff;
+  --sidebar-bg: #f8f9fa;
+  --primary-dark: #0d1117;
+  --highlight: #0d6efd;
+  --light-gray: #f1f1f1;
+}
+
+body {
+  background-color: var(--light-gray);
+  font-family: 'Segoe UI', sans-serif;
+}
