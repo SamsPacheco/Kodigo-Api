@@ -1,14 +1,17 @@
-import React from 'react'
-import { AccommodationCard, Sidebar } from '../components';
+import React, {useState} from 'react'
+import { AccommodationCard, Sidebar, ModalAlojamiento } from '../components';
 
 export const Dashboard = () => {
+
+  const [mostrarModalAlojamientos, setMostrarModalAlojamientos] = useState(false);
+
   return (
     <section className="d-flex" style={{height: '100dvh'}}>
       <Sidebar />
       <main className="p-4 flex-grow-1 position-relative">
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h3>Alojamientos</h3>
-          <button className="btn btn-dark d-none d-md-block">
+          <button className="btn btn-dark d-none d-md-block" onClick={() => {setMostrarModalAlojamientos(true)}} >
             <i className="bi bi-plus me-1"></i> Nuevo Alojamiento
           </button>
 
@@ -20,6 +23,10 @@ export const Dashboard = () => {
 
         <AccommodationCard />
       </main>
+
+      {mostrarModalAlojamientos && (
+        <ModalAlojamiento cerrarModalAlojamientos={() => setMostrarModalAlojamientos(false)} />
+      )}
     </section>
   );
 }

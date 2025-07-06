@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { KodigoApiApp } from './KodigoApiApp.jsx'
-import { BrowserRouter } from 'react-router'
+import { BrowserRouter, Route, Routes } from 'react-router'
+import { Dashboard } from './pages/Dashboard.jsx';  
 
 import 'bootstrap/dist/css/bootstrap.min.css'; // <-- Bootstrap CSS
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // <-- JS Bundle (con Popper)
@@ -12,7 +13,10 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-        <KodigoApiApp />
+        <Routes>
+          <Route path="/" element={<KodigoApiApp />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
     </BrowserRouter>
   </React.StrictMode>,
 );
