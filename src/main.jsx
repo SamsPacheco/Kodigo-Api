@@ -13,10 +13,9 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<KodigoApiApp />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
+        
+          <KodigoApiApp />
+          
     </BrowserRouter>
   </React.StrictMode>,
 );
