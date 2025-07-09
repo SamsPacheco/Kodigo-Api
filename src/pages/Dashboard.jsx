@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { AccommodationCard, Sidebar, ModalAlojamiento } from '../components';
+import { AccommodationCard, Sidebar, ModalAlojamiento} from '../components';
 
 export const Dashboard = () => {
 
@@ -7,7 +7,7 @@ export const Dashboard = () => {
 
   return (
     <section className="d-flex" style={{height: '100dvh'}}>
-      <Sidebar />
+      <Sidebar  />
       <main className="p-4 flex-grow-1 position-relative">
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h3>Alojamientos</h3>
@@ -21,12 +21,13 @@ export const Dashboard = () => {
           
         </div>
 
-        <AccommodationCard />
+        <AccommodationCard  />
       </main>
-
+  
       {mostrarModalAlojamientos && (
         <ModalAlojamiento cerrarModalAlojamientos={() => setMostrarModalAlojamientos(false)} />
       )}
     </section>
   );
 }
+ 
