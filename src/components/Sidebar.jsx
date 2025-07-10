@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import {ModalDetalleReservaciones} from '../components';
 
 export const Sidebar = ({onClick}) => {
-  const [isActive, setIsActive] = useState(false)
-  const [mostrarModalDetalleReserva, setMostrarModalDetalleReserva] = useState(false);
-  
+  const [isActive, setIsActive] = useState(false)  
   return (
     <>
     <section style={{backgroundColor: 'var(--sidebar-bg)' }} className='p-2'>
@@ -19,7 +16,7 @@ export const Sidebar = ({onClick}) => {
               Alojamientos
             </a>
           </li>
-          <li onClick={()=>setMostrarModalDetalleReserva(true)}>
+          <li>
             <a href="#" className="nav-link text-dark">
               <i className="bi bi-calendar-event me-2 fs-5"></i>
               Reservaciones
@@ -35,11 +32,6 @@ export const Sidebar = ({onClick}) => {
           </a>
         </div>
       </section>
-       {mostrarModalDetalleReserva &&(
-              <ModalDetalleReservaciones cerrarModalDetalleReservaciones={()=> setMostrarModalDetalleReserva(false)}/>
-            )}
-      
-
     </section>
     </>
   );
