@@ -1,29 +1,5 @@
 import React from 'react';
-import axios from "axios";
 
-const getBooking= async()=>{
-    try{
-        
-        const reponse=await axios.get(`/api/V1/bookings`)
-        console.log(reponse)
-        const allBookings=reponse.data
-        const one = allBookings.find(b => b.id === id);
-        if (!one) throw new Error("Reservación no encontrada");
-        return one;
-    }catch(error){
-        console.error("el error al obtener los datos", error)
-    }
-}
-const cancelBooking = async (id) => {
-    try{
-        const reponse=await axios.patch(`/api/V1/status_booking/${id}`,{status:'CANCELED'})
-        console.log(reponse)
-        return reponse.data;
-    }catch(error){
-        console.error("el error al obtener los datos", error)
-    }
-    
-}
 export const ModalDetalleReservaciones = ({ cerrarModalDetalleReservaciones, datos }) => {
   const {
     estado = 'Pendiente',
@@ -78,13 +54,13 @@ export const ModalDetalleReservaciones = ({ cerrarModalDetalleReservaciones, dat
 
               <div className="bg-light rounded p-2">
                 <strong>Resumen de la Estancia</strong><br />
-                <span>🌙 {noches} noches</span>
+                <span className="bi-moon-stars"><i/> {noches} noches</span>
               </div>
             </div>
 
             <div className="modal-footer">
               <button type="button" className="btn btn-danger">Cancelar Reservación</button>
-              <button type="button" className="btn btn-secondary" onClick={cerrarModalDetalleReservaciones}>Cerrar</button>
+              <button type="button" className="btn btn-dark d-none d-md-block" onClick={cerrarModalDetalleReservaciones}>Cerrar</button>
             </div>
           </div>
         </div>
