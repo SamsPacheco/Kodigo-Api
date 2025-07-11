@@ -17,8 +17,18 @@ const loginUser = async (email, password) => {
 
 const getUsers = async () => {
 	try {
+		const token = localStorage.getItem("token");
+		if (!token) {
+			throw new Error("No se encontró el token de autenticación");
+		}
+
 		const response = await axios.get(
-			"https://apibookingsaccomodations-production.up.railway.app/api/V1/users"
+			"https://apibookingsaccomodations-production.up.railway.app/api/V1/users",
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}
 		);
 		return response.data; // Retorna la lista de usuarios
 	} catch (error) {
