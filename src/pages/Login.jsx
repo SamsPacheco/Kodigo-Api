@@ -39,49 +39,57 @@ export const Login = () => {
 
 	return (
 		<section className="d-flex align-items-center justify-content-center vh-100 bg-light">
-			<div className="card shadow-lg p-4" style={{ width: "400px" }}>
-				<h2 className="text-center mb-4">Iniciar Sesión</h2>
-				<form onSubmit={handleLogin}>
-					<label htmlFor="email" className="form-label">
-						Correo Electrónico
-					</label>
-					<div className="input-group mb-3">
-						<span className="input-group-text opacity-75">
-							<i className="bi bi-envelope"></i>
-						</span>
-						<input
-							type="email"
-							className="form-control"
-							id="email"
-							placeholder="Ingrese su correo electrónico"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							required
-						/>
-					</div>
+			<div className="container">
+				<div className="row justify-content-center">
+					<div className="col-12 col-sm-8 col-md-6 col-lg-6">
+						<div className="card shadow-lg p-4" style={{ width: "400px" }}>
+							<h2 className="text-center mb-4">Iniciar Sesión</h2>
+							<form onSubmit={handleLogin}>
+								<label htmlFor="email" className="form-label">
+									Correo Electrónico
+								</label>
+								<div className="input-group mb-3">
+									<span className="input-group-text opacity-75">
+										<i className="bi bi-envelope"></i>
+									</span>
+									<input
+										type="email"
+										className="form-control"
+										id="email"
+										placeholder="Ingrese su correo electrónico"
+										value={email}
+										onChange={(e) => setEmail(e.target.value)}
+										required
+									/>
+								</div>
 
-					<label htmlFor="password" className="form-label">
-						Contraseña
-					</label>
-					<div className="input-group mb-3">
-						<span className="input-group-text opacity-75">
-							<i className="bi bi-lock"></i>
-						</span>
-						<input
-							type="password"
-							className="form-control"
-							id="password"
-							placeholder="Ingrese su contraseña"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-							required
-						/>
+								<label htmlFor="password" className="form-label">
+									Contraseña
+								</label>
+								<div className="input-group mb-3">
+									<span className="input-group-text opacity-75">
+										<i className="bi bi-lock"></i>
+									</span>
+									<input
+										type="password"
+										className="form-control"
+										id="password"
+										placeholder="Ingrese su contraseña"
+										value={password}
+										onChange={(e) => setPassword(e.target.value)}
+										required
+									/>
+								</div>
+								{error && (
+									<div className="alert alert-danger py-2">{error}</div>
+								)}
+								<BtnLogin type="submit" className="btn btn-primary w-100">
+									Iniciar Sesión
+								</BtnLogin>
+							</form>
+						</div>
 					</div>
-					{error && <div className="alert alert-danger py-2">{error}</div>}
-					<BtnLogin type="submit" className="btn btn-primary w-100">
-						Iniciar Sesión
-					</BtnLogin>
-				</form>
+				</div>
 			</div>
 		</section>
 	);
