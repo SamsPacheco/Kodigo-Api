@@ -35,7 +35,8 @@ const createAccomodation = async (name, description, address) => {
 				name,
 				description,
 				address,
-				headers: {
+			},
+				{ headers: {
 					Authorization: `Bearer ${token}`,
 				},
 			}
