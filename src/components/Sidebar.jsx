@@ -1,55 +1,47 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router";
 
 export const Sidebar = () => {
 	const [isActive, setIsActive] = useState(false);
+	const navigate = useNavigate()
+
 	const handleLogout = () => {
 		localStorage.removeItem("token");
-		window.location.href = "/login";
+		navigate('/')
 	};
 
 	return (
 		<>
-			<section style={{ backgroundColor: "var(--sidebar-bg)" }} className="p-2">
+			<section style={{ backgroundColor: "var(--sidebar-bg)" }} className="px-1 py-2">
 				<i
-					className={`${
-						isActive ? "bi bi-x-lg fs-2" : "bi bi-list fs-1"
-					} d-lg-none`}
+					className={`bi bi-list fs-1 ${isActive && 'd-none'} d-md-none`}
 					role="button"
 					onClick={() => (isActive ? setIsActive(false) : setIsActive(true))}
 				></i>
 				<section
-					className={`flex-column p-3 ${
-						isActive ? "d-block" : "d-none"
-					} d-lg-flex`}
-					style={{ width: "250px", height: "98dvh" }}
+					className={`sidebar-overlay flex-column p-3 ${isActive ? "d-block" : "d-none"} d-lg-flex`}
 				>
-					<h5 className="mb-4">Panel de Control</h5>
+					<i className={`bi bi-x-lg fs-2 ${ !isActive && 'd-none' }`} role="button" onClick={() => (isActive ? setIsActive(false) : setIsActive(true))}></i>
+					<div>
 
-					<ul className="nav nav-pills flex-column mb-auto">
-						<li className="nav-item">
-							<a href="#" className="nav-link active text-dark bg-light">
-								<i className="bi bi-house-door me-2 fs-5"></i>
+						<h4 className="mb-3 fw-semibold">Panel de Control</h4>
+
+						<ul className="nav nav-pills flex-column mb-auto">
+							<Link to='/accomodations' className="nav-item nav-link active text-dark bg-light">
+								<i className="bi bi-house-door me-1 fs-5"></i>
 								Alojamientos
-							</a>
-						</li>
-						<li>
-							<a href="#" className="nav-link text-dark">
-								<i className="bi bi-calendar-event me-2 fs-5"></i>
+							</Link>
+							<Link to='/bookings' className= "nav-link text-dark">
+								<i className="bi bi-calendar-event me-1 fs-5"></i>
 								Reservaciones
-							</a>
-						</li>
-					</ul>
+							</Link>
+						</ul>
 
-					<hr />
-					<div className="px-4">
-						<a
-							href="#"
-							className="d-flex align-items-center text-dark text-decoration-none"
-							onClick={handleLogout}
-						>
-							<i className="bi bi-box-arrow-in-left me-2 text-secondary fs-4"></i>
-							Cerrar Sesión
-						</a>
+					</div>
+
+					<div className="px-4 position-absolute bottom-0">
+						<i className="bi bi-box-arrow-in-left me-2 text-secondary fs-4" role="button" onClick={handleLogout}></i>
+						Cerrar Sesión
 					</div>
 				</section>
 			</section>
