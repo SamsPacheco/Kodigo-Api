@@ -27,7 +27,7 @@ export const Sidebar = () => {
 						<h4 className="mb-3 fw-semibold">Panel de Control</h4>
 
 						<ul className="nav nav-pills flex-column mb-auto">
-							<Link to='/accomodations' className="nav-item nav-link active text-dark bg-light">
+							<Link to='/dashboard' className="nav-item nav-link active text-white bg-secondary">
 								<i className="bi bi-house-door me-1 fs-5"></i>
 								Alojamientos
 							</Link>

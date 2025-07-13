@@ -23,7 +23,7 @@ export const Dashboard = () => {
       <Sidebar />
       <main className="py-3 px-md-4 flex-grow-1 position-relative overflow-y-auto">
         <section className="d-flex justify-content-between align-items-center mb-3 px-1 px-md-3">
-          <h3 className='fw-semibol'>Alojamientos</h3>
+          <h3 className='fw-semibol px-2'>Alojamientos</h3>
           <button className="btn btn-dark mx-2 mx-md-0" onClick={() => {setMostrarModalAlojamientos(true)}} >
             <i className="bi bi-plus me-1"></i> Nuevo Alojamiento
           </button>
