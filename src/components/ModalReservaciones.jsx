@@ -12,7 +12,7 @@ const ModalReservaciones = () => {
         <div className="modal-content rounded-3">
           <div className="modal-header border-0">
             <h5 className="modal-title">Nueva Reservación</h5>
-            <button type="button" className="btn-close" aria-label="Close"></button>
+            <button type="button" className="btn-close" aria-label="Close" ></button>
           </div>
           <div className="modal-body">
             <div className="mb-3">
