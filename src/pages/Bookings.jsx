@@ -4,6 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import styled from "styled-components";
 import { getBookings } from "../services/bookingsService";
 import { Sidebar } from "../components";
+import ModalReservaciones from "../components/ModalReservaciones"; // <-- Importa el modal
 
 const Calendario = styled.div`
   width: 90%;
@@ -60,6 +61,8 @@ export const Bookings = () => {
   const [events, setEvents] = useState([]);
   const [filterAccommodation, setFilterAccommodation] = useState("");
   const [allBookings, setAllBookings] = useState([]);
+  const [mostrarModal, setMostrarModal] = useState(false); 
+
 
   // Carga inicial de datos
   const obtenerdatos = async () => {
@@ -111,7 +114,13 @@ export const Bookings = () => {
                             <label htmlFor="filter">Filtrar por alojamiento: </label>
                             <Input type="text" id="filter" value={filterAccommodation} onChange={handleFilterChange} placeholder="Escribe el nombre del alojamiento..."/>
                           </div>
-                            <Button type="submit" className="btn btn-dark" >+ Nueva reservación</Button>
+                            <Button
+                              type="button"
+                              className="btn btn-dark"
+                              onClick={() => setMostrarModal(true)} // <-- Abre el modal
+                            >
+                              + Nueva reservación
+                            </Button>
                         </Consultar>
                     </div>
                     {/* Calendario */}
@@ -126,6 +135,9 @@ export const Bookings = () => {
                         }}
                     />
                 </Calendario>
+                {mostrarModal && (
+                  <ModalReservaciones cerrarModal={() => setMostrarModal(false)} />
+                )}
             </main>
         </section>
     </>
