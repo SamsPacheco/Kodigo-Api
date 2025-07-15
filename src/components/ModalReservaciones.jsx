@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { createBooking } from '../services/bookingsService'
+import { getUsers } from "../services/usersService";
+ 
 
 const ModalReservaciones = ({ cerrarModal, onReservaCreada }) => {
   const [accomodation, setAccomodation] = useState('Hotel Villa del Sol El salvador');
@@ -19,7 +21,7 @@ const ModalReservaciones = ({ cerrarModal, onReservaCreada }) => {
   };
   //datos a enviar 
 
-  const user_id = 1; 
+  const user_id = Number(localStorage.getItem("user_id")) || 1;
   const total_amount = 500; 
   const booking = 'BK' + Math.floor(Math.random() * 1000000); // Genera un código aleatorio
 
