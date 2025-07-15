@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { createBooking } from '../services/bookingsService'
 import { getUsers } from "../services/usersService";
+import Swal from 'sweetalert2';
  
 
 const ModalReservaciones = ({ cerrarModal, onReservaCreada }) => {
@@ -10,6 +11,23 @@ const ModalReservaciones = ({ cerrarModal, onReservaCreada }) => {
   const [checkOut, setCheckOut] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  //obtener el nombre del usuario logueado
+  useEffect(() => {
+    const fetchUserName = async () => {
+      const user_id = Number(localStorage.getItem("user_id")) || 1;
+      try {
+        const users = await getUsers();
+        const usuario = users.find(u => u.id === user_id);
+        if (usuario) {
+          setGuest(usuario.name);
+        }
+      } catch (err) {
+        setGuest("");
+      }
+    };
+    fetchUserName();
+  }, []);
 
   const accomodationMap = {
     'Hotel Villa del Sol El salvador': 1,
@@ -39,19 +57,22 @@ const ModalReservaciones = ({ cerrarModal, onReservaCreada }) => {
         user_id: user_id
       };
       
-      console.log('Datos a enviar:', bookingData);
-      
       const response = await createBooking(bookingData);
       
-      console.log('Reserva creada exitosamente:', response);
-      
-      // Mostrar mensaje de éxito con respuesta del servidor
-      alert(response.message || 'Reserva creada exitosamente');
+      Swal.fire({
+        icon: 'success',
+        title: '¡Reserva creada exitosamente!',
+        text: response.message || 'La reservación fue registrada correctamente.'
+      });
       
       if (onReservaCreada) await onReservaCreada();
       cerrarModal();
     } catch (err) {
-      console.error('Error completo:', err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al crear la reservación',
+        text: err.message || 'Ocurrió un error inesperado.'
+      });
       setError(err.message || 'Error al crear la reservación');
     }
     setLoading(false);
@@ -95,7 +116,7 @@ const ModalReservaciones = ({ cerrarModal, onReservaCreada }) => {
                   className="form-control"
                   placeholder="Nombre del huésped"
                   value={guest}
-                  onChange={e => setGuest(e.target.value)}
+                  disabled
                   required
                 />
               </div>
