@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { createBooking } from '../services/bookingsService'
 
-const ModalReservaciones = ({ cerrarModal }) => {
-  const [accomodation, setAccomodation] = useState('Apartamento Centro');
+const ModalReservaciones = ({ cerrarModal, onReservaCreada }) => {
+  const [accomodation, setAccomodation] = useState('Hotel Villa del Sol El salvador');
   const [guest, setGuest] = useState('');
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
@@ -10,13 +10,17 @@ const ModalReservaciones = ({ cerrarModal }) => {
   const [error, setError] = useState('');
 
   const accomodationMap = {
-    'Apartamento Centro': 1,
-    'Apartamento Exterior': 2,
-    'Apartamento Interior': 3
+    'Hotel Villa del Sol El salvador': 1,
+    'Hotel Sevilla': 2,
+    'Villas Playa El Espino': 3,
+    'Eco Glamping El Pinar': 4,
+    'Hotel Fuertes Oscuras': 5,
+    'Decameron Salinitas': 6
   };
-  // Datos fijos o generados desde el código
-  const user_id = 1; // Puedes obtenerlo dinámicamente si tienes autenticación
-  const total_amount = 500; // Puedes calcularlo según lógica de negocio
+  //datos a enviar 
+
+  const user_id = 1; 
+  const total_amount = 500; 
   const booking = 'BK' + Math.floor(Math.random() * 1000000); // Genera un código aleatorio
 
   const handleSubmit = async (e) => {
@@ -42,6 +46,7 @@ const ModalReservaciones = ({ cerrarModal }) => {
       // Mostrar mensaje de éxito con respuesta del servidor
       alert(response.message || 'Reserva creada exitosamente');
       
+      if (onReservaCreada) await onReservaCreada();
       cerrarModal();
     } catch (err) {
       console.error('Error completo:', err);
@@ -73,9 +78,12 @@ const ModalReservaciones = ({ cerrarModal }) => {
                   onChange={e => setAccomodation(e.target.value)}
                   required
                 >
-                  <option>Apartamento Centro</option>
-                  <option>Apartamento Exterior</option>
-                  <option>Apartamento Interior</option>
+                  <option>Hotel Villa del Sol El salvador</option>
+                  <option>Hotel Sevilla</option>
+                  <option>Villas Playa El Espino</option>
+                  <option>Eco Glamping El Pinar</option>
+                  <option>Hotel Fuertes Oscuras</option>
+                  <option>Decameron Salinitas</option>
                 </select>
               </div>
               <div className="mb-3">

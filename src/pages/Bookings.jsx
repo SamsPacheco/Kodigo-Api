@@ -4,7 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import styled from "styled-components";
 import { getBookings } from "../services/bookingsService";
 import { Sidebar } from "../components";
-import ModalReservaciones from "../components/ModalReservaciones"; // <-- Importa el modal
+import ModalReservaciones from "../components/ModalReservaciones"; //Importacion del modal
 
 const Calendario = styled.div`
   width: 90%;
@@ -75,6 +75,11 @@ export const Bookings = () => {
     }
   };
 
+  // Nueva función para manejar la recarga tras una nueva reservación
+  const handleNuevaReservacion = async () => {
+    await obtenerdatos();
+  };
+
   // Función para filtrar los eventos según accommodation
   const filtrarEventos = (bookings, filter) => {
     const eventosFiltrados = bookings.filter((res) => filter === "" ? true : res.accomodation.toLowerCase().includes(filter.toLowerCase())
@@ -136,7 +141,10 @@ export const Bookings = () => {
                     />
                 </Calendario>
                 {mostrarModal && (
-                  <ModalReservaciones cerrarModal={() => setMostrarModal(false)} />
+                  <ModalReservaciones 
+                    cerrarModal={() => setMostrarModal(false)} 
+                    onReservaCreada={handleNuevaReservacion}
+                  />
                 )}
             </main>
         </section>
