@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { createBooking } from '../services/bookingsService'
 import { getUsers } from "../services/usersService";
 import Swal from 'sweetalert2';
- 
+
 
 const ModalReservaciones = ({ cerrarModal, onReservaCreada }) => {
   const [accomodation, setAccomodation] = useState('Hotel Villa del Sol El salvador');
@@ -40,7 +40,7 @@ const ModalReservaciones = ({ cerrarModal, onReservaCreada }) => {
   //datos a enviar 
 
   const user_id = Number(localStorage.getItem("user_id")) || 1;
-  const total_amount = 500; 
+  const total_amount = 500;
   const booking = 'BK' + Math.floor(Math.random() * 1000000); // Genera un código aleatorio
 
   const handleSubmit = async (e) => {
@@ -56,15 +56,15 @@ const ModalReservaciones = ({ cerrarModal, onReservaCreada }) => {
         accomodation_id: accomodationMap[accomodation],
         user_id: user_id
       };
-      
+
       const response = await createBooking(bookingData);
-      
+
       Swal.fire({
         icon: 'success',
         title: '¡Reserva creada exitosamente!',
         text: response.message || 'La reservación fue registrada correctamente.'
       });
-      
+
       if (onReservaCreada) await onReservaCreada();
       cerrarModal();
     } catch (err) {
@@ -137,7 +137,13 @@ const ModalReservaciones = ({ cerrarModal, onReservaCreada }) => {
                     type="date"
                     className="form-control"
                     placeholder="Fecha de fin"
-                    min={checkIn || new Date().toISOString().split('T')[0]}
+                    min={
+                      checkIn
+                        ? new Date(new Date(checkIn).setDate(new Date(checkIn).getDate() + 1))
+                          .toISOString()
+                          .split("T")[0]
+                        : new Date().toISOString().split("T")[0]
+                    }
                     value={checkOut}
                     onChange={e => setCheckOut(e.target.value)}
                     required
