@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
-import { loginUser } from "../services/usersService";
+import { loginUser, getUsers } from "../services/usersService";
 import { FadeLoader } from "react-spinners";
 import { useNavigate } from "react-router";
 
@@ -35,12 +35,22 @@ export const Login = () => {
 			const response = await loginUser(email, password);
 			if (response.token) {
 				localStorage.setItem("token", response.token);
-				navigate('/dashboard')
-			}
-		} catch (err) {
-			setError(err.message || "Error al iniciar sesión");
+
+      const users = await getUsers();
+      const usuario = users.find(u => u.email.trim().toLowerCase() === email.trim().toLowerCase());
+      if (usuario) {
+        localStorage.setItem("user_id", usuario.id);
+      } else {
+        localStorage.removeItem("user_id");
+      }
+
+			navigate('/dashboard')
 		}
-	};
+	} catch (err) {
+		setError(err.message || "Error al iniciar sesión");
+	}
+	setisLoading(false);
+};
 
 	return (
 		<>

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
 
 export const Sidebar = () => {
 	const [isActive, setIsActive] = useState(false);
 	const navigate = useNavigate()
+	const location = useLocation();
 
 	const handleLogout = () => {
 		localStorage.removeItem("token");
@@ -27,14 +29,18 @@ export const Sidebar = () => {
 						<h4 className="mb-3 fw-semibold">Panel de Control</h4>
 
 						<ul className="nav nav-pills flex-column mb-auto">
-							<Link to='/dashboard' className="nav-item nav-link active text-white bg-secondary">
-								<i className="bi bi-house-door me-1 fs-5"></i>
-								Alojamientos
-							</Link>
-							<Link to='/bookings' className= "nav-link text-dark">
-								<i className="bi bi-calendar-event me-1 fs-5"></i>
-								Reservaciones
-							</Link>
+							<Link
+                                to='/dashboard'
+                                className={`nav-item nav-link ${location.pathname === '/dashboard' ? 'active text-white bg-secondary' : 'text-black'}`}>
+                                <i className="bi bi-house-door me-1 fs-5"></i>
+                                Alojamientos
+                            </Link>
+							<Link 
+                                to='/bookings'
+                                className={`nav-link text-dark ${ location.pathname === '/bookings' ? 'active text-white bg-secondary' : 'text-black'}`}>
+                                <i className="bi bi-calendar-event me-1 fs-5"></i>
+                                Reservaciones
+                            </Link>
 						</ul>
 
 					</div>
