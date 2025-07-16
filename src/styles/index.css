@@ -1,0 +1,37 @@
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+:root {
+  --background-accommodation: #ffffff;
+  --sidebar-bg: #f8f9fa;
+  --primary-dark: #0d1117;
+  --highlight: #0d6efd;
+  --light-gray: #f1f1f1;
+}
+
+body {
+  background-color: var(--light-gray);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* sidebar */
+/* Estilos para móviles: el sidebar se superpone al contenido */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: var(--sidebar-bg);
+  overflow-y: auto;
+}
+
+/* A partir de tablets para arriba, restauramos el comportamiento normal */
+@media (min-width: 768px) {
+  .sidebar-overlay {
+    position: relative;
+    width: 225px;
+    height: 98dvh;
+  }
+}
+
+
