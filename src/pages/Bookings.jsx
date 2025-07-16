@@ -32,18 +32,17 @@ const Calendario = styled.div`
 `;
 
 const Input = styled.input`
-    width: 18rem;
+  width: 18rem;
 `;
 
 const Button = styled.button`
-    width: 11rem;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pading: 0.5rem;
+  width: 11rem;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
 `;
-
 
 const Consultar = styled.div`
   display: flex;
@@ -82,7 +81,11 @@ export const Bookings = () => {
 
   // Función para filtrar los eventos según accommodation
   const filtrarEventos = (bookings, filter) => {
-    const eventosFiltrados = bookings.filter((res) => filter === "" ? true : res.accomodation.toLowerCase().includes(filter.toLowerCase())
+    const eventosFiltrados = bookings
+      .filter((res) =>
+        filter === ""
+          ? true
+          : res.accomodation.toLowerCase().includes(filter.toLowerCase())
       )
       .map((res) => ({
         id: res.id,
@@ -90,7 +93,7 @@ export const Bookings = () => {
         start: res.check_in_date,
         end: res.check_out_date,
         color: res.status === "CONFIRMED" ? "green" : "red",
-        titleTooltip: 'Estado: ' + res.status,
+        titleTooltip: "Estado: " + res.status,
       }));
     setEvents(eventosFiltrados);
   };
@@ -150,4 +153,4 @@ export const Bookings = () => {
         </section>
     </>
   );
-}
+};
