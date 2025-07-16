@@ -4,6 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import styled from "styled-components";
 import { cancelBooking, getBookings } from "../services/bookingsService";
 import { ModalDetalleReservaciones, Sidebar } from "../components";
+import ModalReservaciones from "../components/ModalReservaciones"; 
 import Swal from "sweetalert2";
 
 const Calendario = styled.div`
@@ -60,9 +61,9 @@ export const Bookings = () => {
   const [events, setEvents] = useState([]);
   const [filterAccommodation, setFilterAccommodation] = useState("");
   const [allBookings, setAllBookings] = useState([]);
-  const [modalDetalleRecervaciones, setModalDetalleRecervaciones] =
-    useState(false);
+  const [modalDetalleRecervaciones, setModalDetalleRecervaciones] = useState(false);
   const [reservacionSeleccionada, setReservaSeleccionada] = useState(null);
+  const [modalReservaciones, setModalReservaciones] = useState(false);
 
   const calcularNoches = (inicio, fin) => {
     const inDate = new Date(inicio);
@@ -131,7 +132,11 @@ export const Bookings = () => {
                     placeholder="Escribe el nombre del alojamiento..."
                   />
                 </div>
-                <Button type="submit" className="btn btn-dark">
+                <Button 
+                  type="button" 
+                  className="btn btn-dark"
+                  onClick={() => setModalReservaciones(true)}
+                >
                   + Nueva reservación
                 </Button>
               </Consultar>
@@ -173,12 +178,9 @@ export const Bookings = () => {
             {modalDetalleRecervaciones && reservacionSeleccionada && (
               <ModalDetalleReservaciones
                 datos={reservacionSeleccionada}
-                cerrarModalDetalleReservaciones={() =>
-                  setModalDetalleRecervaciones(false)
-                }
+                cerrarModalDetalleReservaciones={() => setModalDetalleRecervaciones(false)}
                 onCancelarReserva={async (id) => {
                   try {
-                    console.log("se ejecuto onCncel",id)
                     await cancelBooking(id);
                     Swal.fire(
                       "Cancelada",
@@ -190,6 +192,15 @@ export const Bookings = () => {
                   } catch (error) {
                     Swal.fire("Error", error.message, "error");
                   }
+                }}
+              />
+            )}
+            {modalReservaciones && (
+              <ModalReservaciones
+                cerrarModal={() => setModalReservaciones(false)}
+                onReservaCreada={() => {
+                  setModalReservaciones(false);
+                  obtenerdatos();
                 }}
               />
             )}
